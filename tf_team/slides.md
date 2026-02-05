@@ -68,7 +68,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 <!-- 
-저는 산업공학 박사로, 생성형 AI·강화학습·머신러닝을 활용해서 연구하고, 실무에 적용하고 있는 전문가입니다. 공공기관과 금융·산업 현장에서 AI 기반 의사결정 자동화와 분석 고도화를 실제로 구현해 온 경험을 바탕으로, AI를 기존 업무에 현실적으로 적용하는 방법을 중심으로 강의합니다. 기술 설명에 그치지 않고 중부발전 기관 특성을 고려한 단계적 AI 도입과 활용 방향을 제시해보려 합니다.
+저는 산업공학 박사로, 생성형 AI·강화학습·머신러닝을 활용해서 연구하고, 실무에 적용하고 있는 전문가입니다. 공공기관과 금융·산업 현장에서 AI 기반 의사결정 분석 고도화를 실제로 구현해 온 경험을 바탕으로, 기존 업무에 현실적으로 적용하는 방법 중심으로 강의합니다. 기관 특성을 고려한 단계적 AI 도입과 활용 방향을 제시해보려 합니다.
 
  -->
 ---
@@ -113,28 +113,32 @@ title: AX Icebreaking
 
 #### 질문 ③ "이거 AI로 자동화하면
 **훨씬 덜 귀찮을 텐데**"
-라고 생각해본 적 있다 → ☝️ 해당되면 손가락 접기
+라고 생각해본 적 있다 
 
-<br>
+☝️ 해당되면 손가락 접기
+
 </v-click>
 
 <v-click>
 
 #### 질문 ④ 엑셀 · 시스템 · 수기 입력 등
-**반복 작업이 많다고 느낀다** → ☝️ 해당되면 손가락 접기
+**반복 작업이 많다고 느낀다** 
+
+☝️ 해당되면 손가락 접기
 
 </v-click>
 
 <v-click>
 
-#### 질문 ⑤ AI가 무섭다기보다
-**어디까지 써도 되는지 애매**하다고 느낀다
+#### 질문 ⑤ AI **어디까지 써도 되는지 애매**하다고 느낀다
+☝️ 해당되면 손가락 접기
+
 
 </v-click>
 
 </div>
 
-<img v-click="6" src="./images/icebreaking1.png" alt="AX Icebreaking" style="height: 80%; width: auto; position: absolute; top: 100px;">
+<img v-click="6" src="./images/icebreaking1.png" alt="AX Icebreaking" style="height: 80%; width: auto; position: absolute; top: 70px;">
 
 
 <div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
@@ -307,6 +311,7 @@ transition: slide-left
 - **계통/시장/정산** 비롯한 외부 연계가 많음
   - B2B 구조(최종 고객은 사람이 아님)
 - **현장-본사-협력사**를 관통하는 프로세스가 핵심
+  - 판매사 - 중개사 - 발전사 
 
 <br>
 <div style="font-size: 1.2rem;">
@@ -316,12 +321,12 @@ transition: slide-left
 
  &nbsp; "화려한 자동화" 보다, **운영 안정성 · 예측 정확도 · 의사결정 속도 · 감사 대응력**을 높이는 것
 
- &nbsp; **"빠른 혁신" vs. "안전한 진화"** 
+ &nbsp; <span v-mark.circle.red> **"빠른 혁신"** </span> **vs.** <span v-mark.circle.red> **"안전한 진화"** </span>
 
 </v-click>
 </div>
 
-<v-drag pos="474,253,446,_,-15">
+<v-drag pos="452,160,482,_,-7">
   <v-click>
   <div style="font-weight: bold; font-size: 1.6rem; color: #af1818ff;">
 
@@ -385,11 +390,11 @@ Quiz.
 
 **데이터는 이미 충분한가?** →  발전사 내 이미 데이터 많을 듯
 
-- 데이터 핵심: “생성, AI”보다 “연결·정합성·메타데이터”
+- 데이터 핵심: “생성, AI”보다 <span v-mark.underline.red>“연결·정합성·메타데이터”</span>
 - 실패는 보통 여기서 발생
   - 시스템별 ID 불일치(설비, 부품, 작업)
   - 시간축 불일치(샘플링, 정산, 기록)
-  - 검색 불가안 문서 상태(PDF, 스캔, 서식 난립)
+  - 검색 불가인 문서 상태(PDF, 스캔, 서식 난립)
 
 예시.
 - 센서·상태 데이터
@@ -401,6 +406,11 @@ Quiz.
 
 <div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
 <div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+- 출력·운전 조정 자동화(범위 넓음) → 위험
+- 출력·고장·연료 리스크 사전 경고 → 안전
+- 고장 가능성 조기경보 + 근거 제시 → 안전하고 효과 큼 -->
 ---
 layout: two-cols
 layoutClass: gap-16
@@ -410,7 +420,7 @@ transition: slide-left
 ## 발전사 AX의 핵심 원칙 ③  
 
 차세대, 전환 시 **흔한 실패 패턴**
-1) PoC는 성공 → 현장 사용률 0%
+1) <span v-mark.underline.red> PoC는 성공 → 현장 사용률 0%</span>
 2) IT 주도 → 업무 실행자 부재
 3) 규정, 감사, 보안 반영 누락
 4) 정답을 주는 AI 라는 환상 → 책임 회피/반발
@@ -418,7 +428,7 @@ transition: slide-left
 **대응 원칙**
 - 현업에 직접 연결(시간, 품질, 리스크)
 - 업무 단계에 끼워 넣기(대시보드, 문서작성, 승인흐름)
-- 현장 사용이 최우선
+- <span v-mark.circle.red> 현장 사용 </span> 이 최우선
 
 ::right::
 <v-click>
@@ -570,6 +580,8 @@ transition: slide-up
  <!-- ⭕ ❌ 자동 제어 &nbsp;&nbsp;&nbsp;&nbsp; ⭕ ❌ 조기 경보   -->
 
 ::right::
+<v-click>
+
 #### **Strategic AX 2. 통합 의사결정 지원**
 <br>
 
@@ -583,6 +595,7 @@ transition: slide-up
   - `"연료비 절감 시나리오 A는 단기 유리하지만,
     3개월 내 정비 리스크가 증가" 같은 설명`
 
+</v-click>
 <div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
 <div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
 
@@ -603,10 +616,10 @@ transition: fade
 ```
 
   - *AX 과제 선정 예시* (4개 축으로 평가)
-    - 가치(Value): 비용절감/정지방지/품질/속도/감사
-    - 리스크(Risk): 안전/규정/보안/책임
-    - 데이터(Data): 접근성/정합성/라벨/희소성
-    - 확산(Scale): 다른 발전소/부서로 복제 가능성 
+    - **가치(Value)**: 비용절감/정지방지/품질/속도/감사
+    - **리스크(Risk)**: 안전/규정/보안/책임
+    - **데이터(Data)**: 접근성/정합성/라벨/희소성
+    - **확산(Scale)**: 다른 발전소/부서로 복제 가능성 
    <br>
     `가치 높고, 리스크 낮고, 데이터 확보 쉬운 것부터`
   - 단기 사용률과 만족도로 현장과 IT 연결 및 확산
@@ -615,6 +628,8 @@ transition: fade
 
 
 ::right::
+<v-click>
+
 #### 이런 다음 단계는 어떤가요?
 
 <br>
@@ -632,6 +647,7 @@ transition: fade
   - 운영 시 로그, 감사, 버전관리, 권한관리 가능한가?
   - 다른 발전소 또는 부서로 복제 가능한가?
 
+</v-click>
 <div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
 <div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
 
