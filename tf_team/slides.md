@@ -89,11 +89,13 @@ transition: fade-out
 
 ## 게임 규칙
 
+
 - 질문에 **해당되면 손가락 1개 접기**
 - 총 **5개 질문**
 - **5개 모두 접으면 우승**
 
 | *`정답은 없습니다. 솔직하게 해주세요.`*
+
 
 ::left::
 
@@ -147,8 +149,6 @@ transition: fade-out
 <img v-click="6" src="./images/icebreaking1.png" alt="AX Icebreaking" style="height: 80%; width: auto; position: absolute; top: 70px;">
 
 
-
-
 <!-- 
 1. 핵심 메시지: AI는 이미 진입 장벽이 없다
 2. 공기업 공감 포인트 상투적 문구 “보고서/회의자료/대외문서”
@@ -181,6 +181,16 @@ transition: fade
 # 언어모델 이해하기(동작 원리 및 발전 과정)
 
 ## <span v-mark.crossed-off.red>1. 언어모델 기초 개념(개요, 주요 요소, 발전 단계)</span>
+
+
+<v-clicks>
+<div style="width:30%; margin: 0 auto;">
+
+
+![alt text](./images/hospitals/notes.png)
+
+</div>
+</v-clicks>
 
 ---
 layout: two-cols-header
@@ -360,6 +370,11 @@ transition: fade
 - *반복적 상호작용*
   - 필요 시 원하는 답변 얻을 때 까지 질문 수정
 
+<div style="width: 95%; margin: 0 auto;">
+
+![alt text](./images/hospitals/prompteng.png)
+</div>
+
 ---
 layout: two-cols-header
 transition: fade
@@ -383,7 +398,7 @@ transition: fade
 
 ::right::
 
-<div style="width: 85%;">
+<div style="width: 75%; margin: 0 auto;">
 
 ![bg fitcenter](./images/hospitals/components1.png)
 </div>
@@ -412,10 +427,12 @@ transition: fade
 - 유형  
   - <span v-mark.circle.red="1">**제로샷 러닝**</span>: 예시없는 하나의 프롬프트로 답 요청
   - <span v-mark.circle.red="2">**퓨샷 러닝**</span>: 작은 예시 제공, 입력 출력 예시 데이터  
-<div style="width: 85%; margin: 0 auto;">
+<div v-click="4" style="margin:0 auto;">
 
-![alt text](./images/hospitals/prompteng.png)
+![alt text](./images/hospitals/prompt_types.png)
 </div>
+
+
 
 > ${^*}$ Wei, Jason, et al. "Chain-of-thought prompting elicits reasoning in large language models." Advances in neural information processing systems 35 (2022): 24824-24837.
 
@@ -426,7 +443,7 @@ transition: fade
 
 ## 상황에 맞는 프롬프트 형식 활용하기
 
-<br><br>
+<br>
 
 ::left::
 - 제로샷 러닝으로 답변의 품질이 적정한 경우
@@ -457,6 +474,8 @@ transition: fade
 
 <br>
 
+::left::
+
 - 프롬프트 유형 점검
   - 명령 {결과}
   - 명령 + 맥락 {결과}
@@ -466,8 +485,12 @@ transition: fade
   - 지시문 반복
   - 지시문, 컨텍스트 위치 변경
   - 지시문 단어를 변경
-  - 하지말 것 보다 해야할 것 지시하기
+  - <span v-mark.underline.red>**하지말 것 보다 해야할 것 지시하기**</span>
 
+
+::right::
+
+<img src="./images/hospitals/unsatisfy1.png" style="width: 130%; max-width: none; margin-left: -50px; margin-right: 10px;" />
 
 
 ---
@@ -538,20 +561,12 @@ transition: fade
   - 잠재적 **위험성 관리** 필요성
 
 ---
+layout:
 transition: slide-down
 ---
 
-## 프롬프트 보안
+![bg fit](./images/hospitals/secure.png)
 
-<br>
-
-- 대표 취약점 공격 사례
-  - 프롬프트 인젝션(Prompt injection)
-  - 데이터 유출
-  - 취약한 샌드박싱
-  - 인증되지 않은 코드 실행
-  - 훈련 데이터 조작: LLM에 취약점을 만들거나 백도어를 심는 공격
-  - 인공지능의 목표와 사람의 목표 불일치(Inadequate Al Alignment): 비윤리적 결과 초래
 
 ---
 layout: center
