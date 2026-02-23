@@ -1,6 +1,6 @@
 ---
 # try also 'default' to start simple
-theme: seriph
+theme: default
 aspectRatio: 16/9
 canvasWidth: 980
 
@@ -9,9 +9,9 @@ canvasWidth: 980
 # https://cover.sli.dev
 background: https://cdn.jsdelivr.net/gh/slidevjs/slidev-covers@main/static/d34DtRp1bqo.webp
 # some information about your slides (markdown enabled)
-title: From-insight AX world !
+title: From-insight AI world !
 info: |
-  ## Presentation slides for KOMIPO AX TF team
+  ## Presentation slides for 전국지방의료원연합회
 
 author: 권 수 정 
 # apply UnoCSS classes to the current slide
@@ -30,7 +30,7 @@ download: true
 
 <style>
   .font-family {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
   }
   .h1 {
     color: #0056b3;
@@ -49,18 +49,28 @@ download: true
     color: #777;
     margin-top: 10px;
   }
+  blockquote {
+    position: absolute;
+    bottom: 2.5em;
+    left: 1em;
+    right: 1em;
+  }
 </style>
 
-# Welcome to AX world !
+<h1 style="font-size: 2.5em; margin-top: -40px;">AI 전환 시대, 의료계 혁신 전략</h1>
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  AX-TF를 위한 실전 가이드 <carbon:arrow-right />
+<div @click="$slidev.nav.next" class="mt-4 py-1" hover:bg="white op-10">
+  
+  <div class="text-2xl font-bold text-gray-400"> 안전한 생성형AI 활용 가이드  <carbon:arrow-right /></div>
 </div>
 
-<div class="abs-br m-6 text-xl">
-  <a href="https://suekwon.github.io/about/" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
+<div class="abs-br m-6 text-sm">
+  <div style="text-align: left;">
+  <h3>
+    <div>권수정 <a href="https://suekwon.github.io/about/" target="_blank" class="slidev-icon-btn"> <carbon:logo-github /> </a></div>
+    <div>AI 전략 컨설턴트 | 프롬인사이트</div>
+  </h3>
+  </div>
 </div>
 
 <!--
@@ -73,7 +83,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
  -->
 ---
 layout: two-cols-header
-title: AX Icebreaking
+title: AI Icebreaking
+transition: fade-out
 ---
 
 ## 게임 규칙
@@ -82,27 +93,24 @@ title: AX Icebreaking
 - 총 **5개 질문**
 - **5개 모두 접으면 우승**
 
-> *정답은 없습니다. 솔직하게 해주세요.*
-
-<br>
+| *`정답은 없습니다. 솔직하게 해주세요.`*
 
 ::left::
 
 <v-click>
 
-#### 질문 ① 최근 한 달 내  
-**ChatGPT 등 AI에 질문해본 적 있다**
-
-☝️ 해당되면 손가락 접기
-
+- #### 질문 ① 최근 한 달 내  
+  **ChatGPT 등 AI에 질문하거나, 보고서·메일·자료 <br> 초안 작성에  AI 도움을 받아본 적 있다**
+  
+  ☝️ 해당되면 손가락 접기
 </v-click>
 
 <v-click>
 
-#### 질문 ② 보고서 · 메일 · 자료 초안에  
-**AI 도움을 받아본 적 있다**
-
-☝️ 해당되면 손가락 접기
+- #### 질문 ② **최소 3개 이상** 
+  다른 AI를 사용해본 적이 있다.
+  
+  ☝️ 해당되면 손가락 접기
 
 </v-click>
 
@@ -111,28 +119,26 @@ title: AX Icebreaking
 
 <v-click>
 
-#### 질문 ③ "이거 AI로 자동화하면
-**훨씬 덜 귀찮을 텐데**"
-라고 생각해본 적 있다 
+- #### 질문 ③ 다음과 같이 생각해본 적 있다 
+  **"이거 AI로 자동화하면 훨씬 덜 귀찮을 텐데**"
 
-☝️ 해당되면 손가락 접기
-
-</v-click>
-
-<v-click>
-
-#### 질문 ④ 엑셀 · 시스템 · 수기 입력 등
-**반복 작업이 많다고 느낀다** 
-
-☝️ 해당되면 손가락 접기
+  ☝️ 해당되면 손가락 접기
 
 </v-click>
 
 <v-click>
 
-#### 질문 ⑤ AI **어디까지 써도 되는지 애매**하다고 느낀다
-☝️ 해당되면 손가락 접기
+- #### 질문 ④ 엑셀 · 시스템 · 수기 입력 등
+  **반복 작업이 많다고 느낀다** 
 
+  ☝️ 해당되면 손가락 접기
+
+</v-click>
+
+<v-click>
+
+- #### 질문 ⑤ AI **어디까지 써도 되는지 애매**하다고 느낀다
+  ☝️ 해당되면 손가락 접기
 
 </v-click>
 
@@ -141,8 +147,6 @@ title: AX Icebreaking
 <img v-click="6" src="./images/icebreaking1.png" alt="AX Icebreaking" style="height: 80%; width: auto; position: absolute; top: 70px;">
 
 
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
 
 
 <!-- 
@@ -170,6 +174,37 @@ title: AX Icebreaking
  -->
 
 ---
+layout: center
+transition: fade
+---
+
+# 언어모델 이해하기(동작 원리 및 발전 과정)
+
+## <span v-mark.crossed-off.red>1. 언어모델 기초 개념(개요, 주요 요소, 발전 단계)</span>
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 생성형AI
+
+::left::
+
+<div class="flex items-center h-full sm:text-2xl text-lg">
+<div>
+
+- **G**enerative **P**re-trained **T**ransformer
+  - 스스로 `콘텐츠`를 생성하는 AI 기술
+
+</div>
+</div>
+
+::right::
+
+![bg right:45%](./images/hospitals/gpt1.png)
+
+---
 layout: two-cols-header
 transition: fade-out
 ---
@@ -184,472 +219,339 @@ transition: fade-out
 - AI로 할 수 있는 업무 종류
 - AI, agent, AGI, Physical AI
 
-
 <v-click>
-
-## AI는 어디로 가는가?
-<br>
-
-- 인공지능의 역사
-- [생성형AI와 산업의 변화: 의료, 법률, 교육, 기술, 창작](https://product.kyobobook.co.kr/detail/S000213501853)
-- 노동의 미래
-- 위험, 기회, 규제, 글로벌 경쟁
-- 변화는 과거부터 있었음
-
-</v-click>
-  
-::right::
-<br><br>
-
-<img border="rounded" class="absolut top-2 " src="./images/wordcloud.png" align="right" style="width: 55%; 5px;" alt="">
-
-<v-click>
-<br><br><br><br><br><br>
+<br><br><br>
 <div align="text-center">
 "우리는 AI를 개발자들에게만 맡겨둘 수 없다" <br>
 (we cannot leave AI only to developers) <br>
- 
+
 <div align="right">by <a href="https://www.google.com/search?q=Lawrence+H.+Summers&oq=Lawrence+H.+Summers&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEHMjIyajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8" target="_blank">Lawrence H. Summers</a> </div>
 </div>
 </v-click>
 
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
-
----
-layout: image-right
-image: ./images/axdx.png
-transition: fade-out
----
-
-## AI vs. Digital
-
-통계, 머신러닝, 강화학습, 최적화 수리 모델 
+::right::
 <br>
+
+<img border="rounded" class="absolut top-1" src="./images/hospitals/wordcloud.png" align="right" style="width: 65%; 5px;" alt="">
+
+
+
+
+---
+transition: fade
+---
+
+## 생성형AI 특성: 발자취 및 핵심 원리
+
 <br> 
 
-#### DX (Digital Transformation)
-- 시스템 전산화
-- 프로세스 자동화
-- 규칙 기반 처리
+- 인공지능 역사와 함께 해 옴
+  - 1950, 1960년대 챗봇: 통계이론 활용(Hidden Markov Model:HMM, Gaussian Mixture Model: GMM)
+  - 1950: <span v-mark.underline.red>[튜링테스트(Computing machinery and intelligence)](https://phil415.pbworks.com/f/TuringComputing.pdf)</span>
+<div class="columns">
 
-<br>
+<div>
 
+- **G**enerative **A**dversarial **N**etwork $^{*}$
+  - real + fake(생성) -> 판별
+  - 정교한 생성, 판별력 증대
+  - <span v-mark.underline.red> 진짜 같아 보이는 가짜 생성 </span>
 
-#### AX (AI Transformation)
+</div>
+<div>
 
-- 불확실성 다룸
-- 예측·설명·판단 <span v-mark.underline.red> 보조</span>
-- 사람의 의사결정을 <span v-mark.after.circle.red> **대체하지 않음**</span>
-
-<br>
-<br>
-
-<!-- 
-| <span class="bold">DX (Digital Transformation)</span> | <span class="bold">AX (AI Transformation)</span> |
-| :--- | :--- |
-| 시스템 전산화<br>프로세스 자동화<br>규칙 기반 처리 | 불확실성 다룸<br>예측·설명·판단 보조<br>사람의 의사결정을 **대체하지 않음** | -->
-
-<!-- ::right::
-
-<img border="rounded" src="./images/axdx.png" align="center" style="width: 80%; " alt="">
-
-<br>
-<br> -->
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: two-cols-header
-transition: fade-out
----
-
-## AX = AI + 업무 전환 
-
-<br>
-<br> 
-<br>
-
-::left::
-  <span v-mark.circle.red> 발전사</span>에서 **AX가 왜 어려운지** 이해
-<br><br> **<span v-mark.underline.red>효율적으로 시작할</span> 수 있는 AX 업무** 구분
-<br><br> <span v-mark.underline.red> 시간이 걸려도 </span> **반드시 해야 하는 AX 영역** 인식
-<br><br> <span v-mark.circle.red> TF 팀</span>이 가져야 할  **역할과 관점 정리**
-
-<div v-click>
-  <div class="mt-10 py-1" hover:bg="white op-10">
-    <h3 style="color: #af1818ff;"> 발전사의 AX는 무엇이 다른가!  <carbon:arrow-right /> </h3> 
-  </div>
+- **V**ariational **A**uto**E**ncoder $^{**}$
+  - <span v-mark.circle.red> Encoder </span> + <span v-mark.circle.red> Decoder</span>
+  - *Latent space(잠재 영역)*
+    - 주요 특성만 추출한 압축형태
+  - *Reparameterization*
+    - 원본과 유사하게 재생성
+</div>
 </div>
 
-::right::
 
-<img border="rounded" src="./images/axinplant.png" align="center" style="width: 90%; " alt="">
+> $^{*}$ [Goodfellow, Ian, et al. "Generative Adversarial Networks." COMMUNICATIONS OF THE ACM 63.11 (2020).](https://d1wqtxts1xzle7.cloudfront.net/96484772/3422622-libre.pdf?1672244858=&response-content-disposition=inline%3B+filename%3DGenerative_adversarial_networks.pdf&Expires=1730881839&Signature=Lq6n4gvdXmaVrQoFzo6arYC1JePl6KTuehLd5nK67sngpp3KCj52mPmk5wYNkYmgtpXxOEEH22jU2e1OVrJsAWiV-8~NjZKIpKcJJFSZ2-ctPEtFHszZOkH6D9zaIVN57iFSZcumDtU6zpWnxkv~qHNttBOjS2zRClc0ysl81R2e7LHUTX4q1yA989Duv2KZc5TU9e-m4crrLjeratIOJJ~UbBjldWkR7HpMTVPR0AAmg7hVUu0VcyZX5JeU4Bfk4Kp4EWLlznewZLthA5wMXMevOuX2v~r1q6kZ5BMuLDh4C0XjBD09xR84Gf~xoG1L7F723~MUJGTNf7jibJdnsg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
+> 
+> $^{**}$ [Kingma, Diederik P. "Auto-encoding variational bayes." arXiv preprint arXiv:1312.6114 (2013).](https://www.ee.bgu.ac.il/~rrtammy/DNN/StudentPresentations/2018/AUTOEN~2.PDF)
 
-<!-- <div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">  
-</div> -->
-
-<!--
-Here is another comment.
--->
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
-layout: two-cols-header
-transition: slide-left
+transition: fade
 ---
 
-## 발전사가 특히 고려해야 할 특성 
+## 토큰화
+- 문자열(텍스트) -> 압축 기호(정수 벡터)
+- 각 토큰은 유티크ID 로 매핑
+- 임베딩: 정수를 특정 크기 벡터로 변환
 
-<br>
+<div style="width:70%">
 
-- **물리 설비 중심 산업**
-- **안전·규정·감사·책임**이 강함
-  - 사고 = 사회적 리스크
-  - 규제·감사·책임 강한 구조
-- **계통/시장/정산** 비롯한 외부 연계가 많음
-  - B2B 구조(최종 고객은 사람이 아님)
-- **현장-본사-협력사**를 관통하는 프로세스가 핵심
-  - 판매사 - 중개사 - 발전사 
-
-<br>
-<div style="font-size: 1.2rem;">
-
-- <span v-mark.underline.red> 발전사에서 AX의 목표는,</span>
-<v-click>
-
- &nbsp; "화려한 자동화" 보다, **운영 안정성 · 예측 정확도 · 의사결정 속도 · 감사 대응력**을 높이는 것
-
- &nbsp; <span v-mark.circle.red> **"빠른 혁신"** </span> **vs.** <span v-mark.circle.red> **"안전한 진화"** </span>
-
-</v-click>
+  ![bg fit](./images/hospitals/sentence2embmatrix1.png)  
+  
+  <b> Figure</b>: 입력문장 토큰화, 임베딩 매트릭스 생성 과정.
+  
 </div>
-
-<v-drag pos="452,160,482,_,-7">
-  <v-click>
-  <div style="font-weight: bold; font-size: 1.6rem; color: #af1818ff;">
-
-  "안전하게 빠른 전환"
-  </div>
-
-  <img    
-    class="relative bottom-45 left+100 w-70 h-52 opacity-80"
-    style="color: #af1818ff;"
-    src="https://sli.dev/assets/arrow-bottom-left.svg"
-    alt=""
-  />
-  <p v-after class="relative bottom-85 left-25 opacity-30 transform -rotate-10">Here!</p>
-
-  </v-click>  
-</v-drag>
-
-<!-- 
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  | -->
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
-
----
-layout: two-cols
-layoutClass: gap-16
-transition: slide-left
----
-
-## AX 전환 핵심 원칙 ①
-
-“결정 대체”가 아니라 **설명·추천·예측**으로 시작
-- ❌ AI가 운영 결정을 대신한다(책임·안전 리스크 폭발)
-- ⭕ AI가 **가능한 시나리오와 근거**를 제시한다
-- ⭕ 사람은 최종 판단/승인(감사·책임 체계에 부합)
-
-예시.
-
-<!--
-- 출력·운전 조정 자동화(범위 넓음) → 위험
-- 출력·고장·연료 리스크 사전 경고 → 안전
-- 고장 가능성 조기경보 + 근거 제시 → 안전하고 효과 큼-->
-Quiz.
-  - 🅰️ 🅱️ 자동화 vs. 판단 보조
-  - ⭕ ❌ AI가 대신 결정  
-  - ⭕ ❌ AI가 설명하고 예측
-
-
-::right::
-
-<v-click> 
-
-## AX 전환 핵심 원칙 ② 
-
-**데이터는 이미 충분한가?** →  발전사 내 이미 데이터 많을 듯
-
-- 데이터 핵심: “생성, AI”보다 <span v-mark.underline.red>“연결·정합성·메타데이터”</span>
-- 실패는 보통 여기서 발생
-  - 시스템별 ID 불일치(설비, 부품, 작업)
-  - 시간축 불일치(샘플링, 정산, 기록)
-  - 검색 불가인 문서 상태(PDF, 스캔, 서식 난립)
-
-예시.
-- 센서·상태 데이터
-- 정비이력, 작업지시, 부품교체
-- 운전일지(텍스트), 장애보고서
-- 규정, 매뉴얼, 기술기준서
-- 시장데이터, 정산데이터, 연료데이터, 구매·계약 문서
-</v-click>
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-<!--
-- 출력·운전 조정 자동화(범위 넓음) → 위험
-- 출력·고장·연료 리스크 사전 경고 → 안전
-- 고장 가능성 조기경보 + 근거 제시 → 안전하고 효과 큼 -->
----
-layout: two-cols
-layoutClass: gap-16
-transition: slide-left
----
-
-## 발전사 AX의 핵심 원칙 ③  
-
-차세대, 전환 시 **흔한 실패 패턴**
-1) <span v-mark.underline.red> PoC는 성공 → 현장 사용률 0%</span>
-2) IT 주도 → 업무 실행자 부재
-3) 규정, 감사, 보안 반영 누락
-4) 정답을 주는 AI 라는 환상 → 책임 회피/반발
-
-**대응 원칙**
-- 현업에 직접 연결(시간, 품질, 리스크)
-- 업무 단계에 끼워 넣기(대시보드, 문서작성, 승인흐름)
-- <span v-mark.circle.red> 현장 사용 </span> 이 최우선
-
-::right::
-<v-click>
-
-## 발전사 AX의 핵심 원칙 ④  
-
-일반적으로 모델의 성능보다,
-- 격리, 망분리, 접근통제(데이터 반출-LLM 사용 정책)
-- 가용성(업무, 설비 운영 영향 최소화)
-- 변경관리(모델 혹은 규칙 업데이트 승인 프로세스)
-- 감사 추적성(누가, 무엇을, 왜 추천했는지)
-- 도입 보다 운영 가능한 체계가 AX의 실체!
-
-</v-click>
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: two-cols-header
-transition: fade-out
----
-
-## AX를 가장 효율적으로 시작할 수 있는 업무(1/2)
-<br>
-
-::left::
-
-#### **Quick Win 1. 문서/지식 기반 업무**
-<br>
-
-- **대상**
-  - 정비이력, 장애 보고서/운전일지/기술 매뉴얼
-- **AX 적용**
-  - 사내 지식검색 또는 질의응답 AI
-  - 유사 고장 사례 자동 탐색 또는 추천
-    - 원인, 조치, 재발방지
-  - 보고서 초안·요약·비교 자동 생성
-  - 신입·비전문가 지원
-- **효과**
-  - 현업 체감도 매우 높음
-  - 안전리스크 낮음
-  - 숙련자 지식 전파 빠름
-
-::right::
-
-<v-click>
-
-#### **Quick Win 2. 보고·회의·공문(초안 + 검증)**
-<br>
-
-- **대상**
-  - 주간·월간 운영 보고, 경영 보고, 이슈 정리, 공문 초안
-- **AX 적용**
-  - 초안 자동 생성
-  - 데이터 → 문장 변환
-  - 요약·비교 자동화
-  <br><br><br>
-- **효과**
-  - 시간 절감 수치로 드러남
-  - 여러 조직으로 확산에 유리
-
-</v-click>
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
-
----
-layout: two-cols-header
-transition: fade-out
----
-
-## AX를 가장 효율적으로 시작할 수 있는 업무(2/2)
-<br>
-::left::
-
-#### **Quick Win 3. 데이터 분석 보조(설명형 분석가)**
-<br>
-
-- **대상**  
-  - 연구기획 - 연구수행 - 연구성과 관리
-  - 연료 가격 시나리오 → 변동 요인 분석
-  - 반복 엑셀 데이터 요약, 분석
-  - 이상치 탐지 → 원인 후보 제시
-- **AX 적용**
-  - 주기적으로 연구주제 관련 검색,요약 서비스
-  - “왜 이번 손익이 변했는지” 요인 분석
-  - 상관관계, 추세 자동 리포트
-- **효과**
-  - 분석, 의사결정 속도 개선
-  - 분석 품질 향상 및 표준화
-
-::right::
-
-<v-click>
-
-#### **Quick Win 4. 질의·행정 응대(근거 제시 챗봇)**
-<br>
-
-- **대상**
-  - 규정, 지침, 절차 문의
-  - 반복 행정 질문(신입, 부서, 교육)
-  <br><br>
-- **AX 적용**
-  - 내부 챗봇
-  - 근거 조항 제시형 답변
-  - 체크리스트 제안
-  <br><br>
-- **효과**
-  - 해당 업무 조직 피로도 감소
-  - 효율적인 업무 처리 및 감사 대응력 보강
-
-</v-click>
-
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
-
----
-layout: two-cols-header
-transition: slide-up
----
-
-## 시간이 걸려도 반드시 해야 하는 AX
-<br>
-::left:: 
-
-#### **Strategic AX 1. 설비 고장 예측**
-<br>
-
-- **필요성**
-  - 설비 노후화 + 고장 비용 급증
-  - 숙련 인력 은퇴 → 지식 소멸
-  - 예기치 못한 정지/사고 리스크 예방 필요
-- **어려운 이유**
-  - 고장 데이터 희소(라벨 부족)
-  - 베테랑 은퇴 = 판단 기준 소멸
-    - 사고 대응/정비 노하우는 문서만으로 부족
-  - 센서,정비 기록 정합성 문제
-  - 책임 이슈(오경보)
-- **현실적 접근**
-  <!-- - 자동제어 ❌ → **조기경보 + 근거 + 대응 추천** ⭕
-  - 중요 설비부터(보일러/터빈/발전기/주요 펌프 등)
-  - “알람”이 아니라 “업무 흐름”에 연결(작업지시/점검)  
-  - 고장/사고 대응 플레이북(사례 기반)
-  - 판단 근거 기록(왜 그렇게 했는지)
-  - 인터뷰->지식화, 시뮬레이션 기반 학습 => 안하면 추후 복구 불가능 
-  - => 이건 늦을수록 회복이 어렵다(선제 투자 필요)
-  - 신입용 시뮬레이션/코칭(질문-답변-근거)
-  - -->
-
- <!-- ⭕ ❌ 자동 제어 &nbsp;&nbsp;&nbsp;&nbsp; ⭕ ❌ 조기 경보   -->
-
-::right::
-<v-click>
-
-#### **Strategic AX 2. 통합 의사결정 지원**
-<br>
-
-- **필요성**
-  - 부서별 최적화가 전체 최적과 다름
-  - 리스크, 비용은 서로 영향을 주고 받음 <br>
-    (정비↔출력↔연료↔정산)
-    <br><br>
-- **현실적 접근**
-  - 정답 제시 >> **트레이드오프 설명 + 시나리오 비교**
-  - `"연료비 절감 시나리오 A는 단기 유리하지만,
-    3개월 내 정비 리스크가 증가" 같은 설명`
-
-</v-click>
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
 
 ---
 layout: two-cols-header
 transition: fade
 ---
 
-## AX TF 조직의 역할 - 작게 시작해서 크게 확산!
+## 생성형AI는 무엇을 잘하고 무엇을 못하는가
+
+::left::
+
+- <span v-mark.circle.red> **잘하는 것** </span>
+  - 반복 작업
+  - 문서 초안 작성
+  - 요약
+  - 패턴 분석
+  - 각종 변환 
+
+- <span v-mark.circle.red> **못하는 것** </span>
+  - 맥락 없는 추정
+  - 법적 최종 판단
+  - 최신 정보(예. 보험수가 최신버전) 완벽 반영  
+  
+::right::
+
+<br><br>
+
+  ![bg](./images/hospitals/pros1.png)  
+
+  <!-- 
+  잘하는 것의 예시: 알파고 2016
+  - 경우의 수가 많은 복잡한 게임
+  - 4:1 승리
+
+- 사람의 통찰력?
+- 글쓰기??
+  - 사람이 더 잘하는 영역?
+   -->
+
+---
+layout: center
+transition: fade
+---
+
+# 실무 활용 사례 소개 - 프롬프트 엔지니어링
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 프롬프트 엔지니어링이란? 
+
+<br> 
+
+::left::
+- 단어와 문장을 미세하게 조정해 AI 응답 최적화
+- 사용 목적에 적합한 문장 구조 설계
+- 사용자 입장
+  - 명확한 응답
+  - 실용성 높은 프롬프트
+- **모델별 특성 이해**: 여러 LLM 강점 및 특성
+- **비용 절감**: 최소 토큰, 최대 결과
+
+::right::
+- LLM이 질문 의도를 정확히 이해하도록 신중하게 작성
+- *구체적 힌트와 추가 정보 제공*
+  - 명확한 의도 전달을 통해 원하는 답변 유도
+- *반복적 상호작용*
+  - 필요 시 원하는 답변 얻을 때 까지 질문 수정
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 프롬프트 주요 구성요소
+
 <br>
 
 ::left::
-#### TF는 기술 조직!?
-
-```yml
->> AX는 기술 프로젝트가 아니라  
->> 업무 판단 구조를 바꾸는 조직 프로젝트다
-```
-
-  - *AX 과제 선정 예시* (4개 축으로 평가)
-    - **가치(Value)**: 비용절감/정지방지/품질/속도/감사
-    - **리스크(Risk)**: 안전/규정/보안/책임
-    - **데이터(Data)**: 접근성/정합성/라벨/희소성
-    - **확산(Scale)**: 다른 발전소/부서로 복제 가능성 
-   <br>
-    `가치 높고, 리스크 낮고, 데이터 확보 쉬운 것부터`
-  - 단기 사용률과 만족도로 현장과 IT 연결 및 확산
-  - 장기 내부 지표로 관리
-<br><br>
-
+- **역할지정** (or 대상명시)    
+- **지시**
+  - 최소 하나 이상 : *지식과 정보* 제공
+  - 단, 너무 많은 지시는 혼란한 답변
+  - 지시 유형 
+    - 요약, 분류, 제안, 현지화
+- **컨텐츠** (수행할 작업 or 목표)
+  - 입력데이터 특수기호 사용
+- **출력형식 지정** (정책, 규칙, 스타일 가이드, 제약)
+  - ex) 테이블, 목록, 마크다운(HTML), 계층구조, 서식(Markdown, LaTex) 등
 
 ::right::
-<v-click>
 
-#### 이런 다음 단계는 어떤가요?
+<div style="width: 85%;">
+
+![bg fitcenter](./images/hospitals/components1.png)
+</div>
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 좋은 프롬프트 작성 핵심
+
+<br> 
+
+::left::
+- 구체적이고 명확한 프롬프트
+- 약어 및 기술 용어
+- 키워드 입력
+- <span v-mark.circle.red="3">**생각의 사슬(CoT)**</span> ${^*}$ 접근법
+  - 여러 단계 세분화해서 추론 능력 향상
+  - 자연스럽고 간접적으로 유도
+- 의도를 반영하지 않는 중립적 질문
+- 예시, 비유 요청
+
+::right::
+
+- 유형  
+  - <span v-mark.circle.red="1">**제로샷 러닝**</span>: 예시없는 하나의 프롬프트로 답 요청
+  - <span v-mark.circle.red="2">**퓨샷 러닝**</span>: 작은 예시 제공, 입력 출력 예시 데이터  
+<div style="width: 85%; margin: 0 auto;">
+
+![alt text](./images/hospitals/prompteng.png)
+</div>
+
+> ${^*}$ Wei, Jason, et al. "Chain-of-thought prompting elicits reasoning in large language models." Advances in neural information processing systems 35 (2022): 24824-24837.
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 상황에 맞는 프롬프트 형식 활용하기
+
+<br><br>
+
+::left::
+- 제로샷 러닝으로 답변의 품질이 적정한 경우
+  * 데이터가 충분할 때  
+    - ex) 코딩, 번역 등
+- LLM 조정해야 하는 경우 
+  * 데이터 부족할 때,
+    - 퓨샷예시 or 학습데이터 제공해 작업 이해 후 수행
+    - ex) 전문가 역할극 or `위키피디아에 따르면`  
+  * 패턴, 규칙 알려주고 판단하도록 지시
+
+::right::
+
+ - <span v-mark.circle.red>**CoT**</span> : 생각하는 방법 알려주기 
+    * ex) 정황을 이해하고 숫자 계산하기 
+ - <span v-mark.circle.red>**제로샷 CoT**</span> 
+    * 생각의 단계, 논리 순서 가이드 없음
+    * 스스로 분석, 단계적 사고 후 해답 제공
+    * `단계별로 생각해` 지시문 주기
+    * ex) 면접질문 생성, 채용공고 
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## 만족스럽지 못한 결과,..
 
 <br>
 
-- 중부발전 AX 로드맵 (3년)
-  - 계통, 운전·정비, 연료·정산·중장기 계획
-- "해야만 하는 부서별 AX" 후보 과제 도출
-- "하면 안 되는 AX” 실패 사례 정리
-- TF 내부 실습용 미니 프로젝트
+- 프롬프트 유형 점검
+  - 명령 {결과}
+  - 명령 + 맥락 {결과}
+  - 명령 + 맥락 + 예시 {결과} : 원샷, 퓨샷
+  - 명령 + 입력 {결과}
+- 내용 외 구조 변경 시도
+  - 지시문 반복
+  - 지시문, 컨텍스트 위치 변경
+  - 지시문 단어를 변경
+  - 하지말 것 보다 해야할 것 지시하기
 
-**좋은 AX 과제 체크리스트 예시(현업 적용 관점)**
-  - 업무 단계에 끼워 넣을 자리가 명확한가?
-  - 추천·요약·근거를 검증 가능한가?
-  - 실패 시 안전장치(사람의 승인, 차단)가 있는가?
-  - 운영 시 로그, 감사, 버전관리, 권한관리 가능한가?
-  - 다른 발전소 또는 부서로 복제 가능한가?
 
-</v-click>
-<div class="absolute bottom-2 left-4 text-xs opacity-80" style="color: #585a5dff;"> Presented by From-insight Inc. &copy 2026</div>
-<div class="absolute bottom-2 right-4 text-xs opacity-80" style="color: #585a5dff;"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+---
+transition: fade
+---
+
+## 프롬프트 엔지니어링의 효용
+
+<br>
+
+- <span v-mark.circle.red>**RLHF**</span>: **R**einforcement **L**earning from **H**uman **F**eedback
+- <span v-mark.circle.red>**InstructGPT**</span>
+  - 13 억 파라미터만 가지고도 1,750억 파라미터 가진 모델 답변보다 신뢰할 수 있음$^{*}$
+- 지도학습 방법
+  - 질문 답변 Fine-tuning
+  - 우수한 답변 데이터로 보상 모델 학습
+  - 답변 생성 $\rightarrow$ 좋은 답변 
+
+<br>
+<br>
+
+> $^{*}$ Ouyang, Long, et al. "Training language models to follow instructions with human feedback." Advances in neural information processing systems 35 (2022): 27730-27744.
+
+---
+transition: fade
+---
+
+## 모델 간 프롬프트 엔지니어링 차이
+
+<br>
+
+<div style="width:70%">
+
+![bg fit](./images/hospitals/tuningeff.png)
+</div>
+
+> https://x.com/karpathy/status/1655994367033884672
+
+
+
+---
+layout: two-cols-header
+transition: fade
+---
+
+## AI 기술이 가져올 미래
+<br>
+
+::left::
+- **AI 리터러시**: AI 시스템을 이해하고 활용하는 역량
+  - (과거) 컴퓨터 활용능력 → (현재) AI 이해 활용
+  - 디지털 리터러시 → AI 리터러시로 확장
+  - 자동화 산업 대체, 새로운 기회: 변화는 과거부터 있었음
+    - 선택이 아닌 필수
+    - AI 역할 확대에 따른 **변화에 적응 능력**  
+  - 위험, 기회, 규제, 글로벌 경쟁
+  - 한계? 
+    - 협업, 문제해결능력
+
+::right::
+- **AI는 어디로 가는가?**
+  - 인공지능의 역사
+  - [생성형AI와 산업의 변화: 의료, 법률, 교육, 기술, 창작](https://product.kyobobook.co.kr/detail/S000213501853)
+  - 노동의 미래
+- <span v-mark.underline.red>**AI 윤리: 책임 있는 사용**</span>
+  - 단순한 기술 이해를 넘어 **윤리적 사회적 영향력**까지 포괄
+  - **책임감**과 **윤리적 마인드** 필수
+  - 잠재적 **위험성 관리** 필요성
+
+---
+transition: slide-down
+---
+
+## 프롬프트 보안
+
+<br>
+
+- 대표 취약점 공격 사례
+  - 프롬프트 인젝션(Prompt injection)
+  - 데이터 유출
+  - 취약한 샌드박싱
+  - 인증되지 않은 코드 실행
+  - 훈련 데이터 조작: LLM에 취약점을 만들거나 백도어를 심는 공격
+  - 인공지능의 목표와 사람의 목표 불일치(Inadequate Al Alignment): 비윤리적 결과 초래
 
 ---
 layout: center
@@ -659,4 +561,18 @@ layout: center
 
 "DONE IS BETTER THAN PERFECT"
 
+</div>
+
+---
+layout: default
+---
+
+## 교육 설문
+
+[https://forms.gle/DZhv4ZqWLAsbjanG7](https://forms.gle/DZhv4ZqWLAsbjanG7)
+
+<div style="width:30%; margin: 0 auto">
+
+  ![bg fit](./images/hospitals/survey.png)
+  
 </div>
