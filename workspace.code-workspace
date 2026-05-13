@@ -1,0 +1,17 @@
+{
+"folders": [
+		{
+			"path": "."
+		}
+	],
+"settings": {
+	"markdown.marp.themes": [
+		"./style/schema.css",
+		"./style/socrates.css",
+		"./style/structure.css",
+		"./style/godel.css"
+    ],
+    "markdown.marp.html": "all"
+}
+}
+
