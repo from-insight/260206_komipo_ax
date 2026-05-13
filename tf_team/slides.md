@@ -15,7 +15,7 @@ mdc: true
 
 ---
 
-<style global>
+<style>
   .font-family {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
   }
