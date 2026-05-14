@@ -696,6 +696,7 @@ transition: fade
 # 예제: 좋은 결과물의 모습
 
 <br>
+
 ::left::
 
 ### AI 결과에서 확인할 점
