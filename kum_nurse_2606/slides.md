@@ -40,9 +40,13 @@ style: ./style.css
 -->
 
 ---
-layout: center
+layout: two-cols-header
 transition: fade
 ---
+
+::left::
+
+<br>
 
 ### 강사 소개
 
@@ -57,12 +61,18 @@ AI 전략 컨설턴트 | 프롬인사이트
 
 📧 [sue.kwon@from-insight.com](mailto:sue.kwon@from-insight.com)
 
+::right::
+
+<div style="width:70%">
+
+![alt text](./images/qrcode.png)
+
+</div>
+
 ---
 layout: center
 transition: fade
 ---
-
-
 
 
 <div class="col-vcenter">
@@ -75,12 +85,6 @@ transition: fade
 </span>
 
 </div>
-
-::left::
-
-
-::end-left::
-
 
 
 ---
