@@ -1,0 +1,261 @@
+/* @theme godel */
+
+/*
+  ============================================
+    Created by Paulo Cunha
+    version: 1.0
+    last update: 24.mar.2023
+  ============================================       
+*/
+
+/* Importing COLOR SCHEMA */
+
+@import "default";
+@import "schema";
+@import "structure";
+
+/* Importing Font */
+/* Font Credit: htts://https://www.cdnfonts.com/ */
+@import url('https://fonts.cdnfonts.com/css/fira-sans-condensed?styles=19730');
+
+/* 한글 폰트 추가 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+
+/* -------------------- ROOT -------------------------------*/
+
+
+:root {
+  
+  font-family: 'Fira Sans Condensed', sans-serif;
+
+  --bold-color                : rgb(71, 107, 184);
+  
+  font-weight: initial;
+  --italic-background-color   : rgba(96, 204, 247, 0.63);
+  --italic-background-color   : rgba(25, 171, 255, 0.295);
+  --italic-background-color   : rgba(214, 25, 66, 0.144);
+  --italic-background-color   : rgba(241, 236, 231, 0.616);
+  
+  --cool-list-color           : rgb(135, 157, 179);
+  
+  --h1-color: rgb(45, 17, 86);
+  --border-color: rgb(111, 75, 165);
+  --table-header-color        : rgba(62, 36, 93, 0.9);
+
+  background-color: white;  
+
+}
+
+h2 strong {
+
+  color: rgb(207, 14, 14);
+
+}
+section.titlepage .title {
+  border-bottom: 1px solid orangered;
+}
+
+section.cite {
+  --strong-color        : rgba(119, 28, 142);
+}
+
+section.titlepage .author,
+section.titlepage .date,
+section.titlepage .organization {
+  text-align: left;
+}
+
+section strong {
+  color:rgba(5, 51, 255, 0.534) ;
+  color:rgba(5, 43, 255, 0.979) ;
+  color:rgb(119, 28, 142) ;
+  
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: 600;
+}
+
+/* -------------------- TRANSITION -------------------------------*/
+
+section.transition em {
+
+  /* color: rgb(10, 100, 235); */
+  background-color: rgba(255, 5, 5, 0.295);
+
+}
+
+section.transition strong {
+
+  color: rgb(255, 5, 5);
+
+}
+
+section.transition {
+
+  background-color: rgb(255, 145, 0);
+  background-color: orange;
+
+}
+
+/* -------------------- TRANSITION2 -------------------------------*/
+
+section.transition2 strong {
+
+  color: rgb(10, 100, 235);
+  color: rgb(161, 240, 3);
+
+}
+
+/* -------------------- BIBLIO -------------------------------*/
+
+section.biblio {
+
+  /* font-family: "Fira Sans", serif;  */
+
+   
+  --text-color              : rgb(253, 252, 252);
+  --biblio-background-color : rgb(0, 0, 0);
+  --border-color            : darkorange;
+  --bold-color              : orange;
+}
+
+section.biblio p {
+
+  font-family: "Fira Sans", serif; 
+
+}
+
+/* -------------------- MERMAID -------------------------------*/
+
+/* Mermaid 다이어그램 스타일링 */
+.mermaid {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  border: 1px solid #e9ecef;
+  overflow-x: auto;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mermaid 노드 상자 크기 자동 조정 */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  fill: #f8f9fa;
+  stroke: #6c757d;
+  stroke-width: 2px;
+  rx: 8px;
+  ry: 8px;
+
+}
+
+/* Mermaid 노드 내부 텍스트 패딩 */
+.mermaid .node text {
+  font-family: 'Noto Sans KR', 'Fira Sans Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* Mermaid 노드 스타일 */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  fill: #f8f9fa;
+  stroke: #6c757d;
+  stroke-width: 2px;
+  rx: 6px;
+  ry: 6px;
+}
+
+/* Mermaid 노드 크기 자동 조정 강화 */
+.mermaid .node {
+  min-width: 200px !important;
+  min-height: 60px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Mermaid SVG 전체 크기 조정 */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  min-height: 300px;
+  min-width: 500px;
+}
+
+/* Mermaid 텍스트 줄바꿈 지원 */
+.mermaid .label {
+  font-family: 'Noto Sans KR', 'Fira Sans Condensed', sans-serif;
+  font-size: 16px;
+  color: #212529;
+  font-weight: 500;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 2;
+}
+
+/* Mermaid 엣지 스타일 */
+.mermaid .edgePath .path {
+  stroke: #495057;
+  stroke-width: 2px;
+}
+
+/* Mermaid 텍스트 스타일 */
+.mermaid .label {
+  font-family: 'Noto Sans KR', 'Fira Sans Condensed', sans-serif;
+  font-size: 13px;
+  color: #212529;
+  font-weight: 500;
+}
+
+/* Mermaid 노드 내부 텍스트 */
+.mermaid .node text {
+  font-family: 'Noto Sans KR', 'Fira Sans Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  word-wrap:break-word;
+}
+
+/* Mermaid 엣지 라벨 */
+.mermaid .edgeLabel {
+  font-family: 'Noto Sans KR', 'Fira Sans Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* Mermaid 화살표 스타일 */
+.mermaid .arrowheadPath {
+  fill: #495057;
+}
+
+/* Mermaid 다이어그램 컨테이너 */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid 코드 블록 스타일 */
+pre.mermaid {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 15px 0;
+  overflow-x: auto;
+}

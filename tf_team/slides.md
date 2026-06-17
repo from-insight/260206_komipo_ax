@@ -4,8 +4,7 @@ pagination: true
 aspectRatio: 16/9
 title: "개념부터 실전까지: AI 활용 실습"
 info: |
-  ## 예제 중심 AI 활용 업무방식 전환
-  NHIS 리더 대상 실습형 강의안
+  ## HD엑셀 실습 
 author: 프롬인사이트
 class: text-center
 drawings:
@@ -20,9 +19,9 @@ style: ../styles.css
 <div class="columns">
   <div class="title-bg"></div>
   <div> </div>
-  <div style="font-size: 2.2em; margin-top: -30px; color: #1a5276; text-align: center;"> Welcome to AX World
+  <div style="font-size: 2.2em; margin-top: -30px; color: #1a5276; text-align: center;"> AI 활용 엑셀
     <div class="mt-6 text-gray-200 text-lg" style="color: #1a5276;">
-   개념부터 실전까지 : <strong style="color:maroon;">휴대폰</strong>으로 함께 하는 <strong style="color:maroon;"> 생성형AI </strong> 
+   개념부터 실전까지 : 실무 및 업무 자동화
 </div>
 
   </div>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>병원 업무 자동화 AI 시연</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#f4f7fb; --card:#ffffff; --ink:#1a2b3c; --sub:#5a6b7c;
+    --line:#e3eaf2; --brand:#1763c7; --brand-d:#0e4a99; --brand-l:#e8f1fc;
+    --teal:#0f9d8e; --amber:#e8a33d; --red:#e0564b; --green:#27a567;
+    --shadow:0 2px 14px rgba(20,50,90,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 60px}
+  header.top{background:linear-gradient(120deg,var(--brand-d),var(--brand));color:#fff;
+    padding:34px 0 30px;margin-bottom:0}
+  header.top .wrap{padding-bottom:0}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.82;font-weight:600}
+  header.top h1{margin:8px 0 6px;font-size:30px;font-weight:800;letter-spacing:-.01em}
+  header.top p{margin:0;opacity:.9;font-size:15px;max-width:680px}
+  .demo-badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+    padding:4px 11px;border-radius:30px;font-size:12px;margin-top:14px;font-weight:600}
+  /* tabs */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:-26px 0 26px;position:relative;z-index:2}
+  .tab{flex:1;min-width:220px;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;cursor:pointer;box-shadow:var(--shadow);transition:.18s;text-align:left}
+  .tab:hover{transform:translateY(-2px)}
+  .tab.active{border-color:var(--brand);box-shadow:0 6px 22px rgba(23,99,199,.18)}
+  .tab .tnum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+    border-radius:8px;background:var(--brand-l);color:var(--brand);font-weight:800;font-size:14px;margin-bottom:8px}
+  .tab.active .tnum{background:var(--brand);color:#fff}
+  .tab .tt{font-weight:700;font-size:15px}
+  .tab .ts{font-size:12.5px;color:var(--sub);margin-top:2px}
+  .panel{display:none;animation:fade .3s}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;
+    box-shadow:var(--shadow);margin-bottom:20px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:840px){.grid2{grid-template-columns:1fr}.tabs{flex-direction:column}}
+  h2.sec{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin:0 0 4px;font-weight:700}
+  h3.title{margin:0 0 18px;font-size:19px;font-weight:800}
+  label{display:block;font-size:13px;font-weight:600;color:var(--sub);margin:14px 0 5px}
+  input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;
+    font-size:14px;font-family:inherit;background:#fbfdff;color:var(--ink)}
+  textarea{resize:vertical;min-height:78px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);background:#fff}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;border:none;
+    padding:12px 20px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-top:18px;transition:.15s}
+  .btn:hover{background:var(--brand-d)}
+  .btn:disabled{opacity:.6;cursor:default}
+  .btn.ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+  .output{background:#fbfdff;border:1px dashed var(--line);border-radius:12px;padding:0;min-height:120px;
+    overflow:hidden;transition:.2s}
+  .out-empty{padding:40px 24px;text-align:center;color:#9aa9b8;font-size:14px}
+  /* AI generating animation */
+  .gen{padding:30px 24px;text-align:center}
+  .gen .dots span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--brand);
+    margin:0 3px;animation:bnc 1s infinite}
+  .gen .dots span:nth-child(2){animation-delay:.15s}
+  .gen .dots span:nth-child(3){animation-delay:.3s}
+  @keyframes bnc{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-8px);opacity:1}}
+  .gen p{color:var(--sub);font-size:13.5px;margin:14px 0 0}
+  /* generated document */
+  .doc{padding:26px 28px;background:#fff;animation:fade .4s}
+  .doc .doc-head{display:flex;justify-content:space-between;align-items:flex-start;
+    border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+  .doc h4{margin:0;font-size:20px;font-weight:800;letter-spacing:.02em}
+  .doc .meta{font-size:12px;color:var(--sub);text-align:right}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .chip{font-size:12px;font-weight:700;padding:5px 11px;border-radius:30px}
+  .chip.dept{background:var(--brand-l);color:var(--brand-d)}
+  .chip.urg-high{background:#fde8e6;color:var(--red)}
+  .chip.urg-mid{background:#fcf2e0;color:#b9802a}
+  .chip.urg-low{background:#e7f6ee;color:var(--green)}
+  .chip.ai{background:#eef0ff;color:#5b4ad1}
+  .doc-field{margin-bottom:13px}
+  .doc-field .k{font-size:11.5px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.04em}
+  .doc-field .v{font-size:14.5px;margin-top:2px;white-space:pre-wrap}
+  .ai-note{background:var(--brand-l);border-left:3px solid var(--brand);padding:11px 14px;border-radius:6px;
+    font-size:13px;color:var(--brand-d);margin-top:16px}
+  .ai-note b{color:var(--brand-d)}
+  /* report */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
+  @media(max-width:840px){.kpis{grid-template-columns:1fr 1fr}}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .kpi .v{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .kpi .l{font-size:12.5px;color:var(--sub);margin-top:2px}
+  .kpi .d{font-size:12px;font-weight:700;margin-top:6px}
+  .up{color:var(--green)}.down{color:var(--red)}
+  .chartbox{position:relative;height:280px}
+  .insight{display:flex;gap:12px;padding:14px 16px;border-radius:11px;background:#fbfdff;border:1px solid var(--line);margin-bottom:11px}
+  .insight .ic{flex:none;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    font-size:15px;background:var(--brand-l)}
+  .insight .tx{font-size:13.7px}
+  .insight .tx b{color:var(--brand-d)}
+  /* education */
+  .edu-out h4{font-size:18px;margin:0 0 4px}
+  .edu-module{border:1px solid var(--line);border-radius:11px;margin-bottom:11px;overflow:hidden}
+  .edu-module .mh{background:#fbfdff;padding:12px 16px;font-weight:700;font-size:14.5px;display:flex;justify-content:space-between;align-items:center}
+  .edu-module .mh .dur{font-size:12px;color:var(--sub);font-weight:600}
+  .edu-module .mb{padding:13px 16px;font-size:13.6px;color:#2c3e50}
+  .edu-module .mb ul{margin:6px 0 0;padding-left:18px}
+  .edu-module .mb li{margin-bottom:4px}
+  .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .pill{font-size:12px;background:#eef4fb;color:var(--brand-d);padding:4px 10px;border-radius:20px;font-weight:600}
+  .foot{text-align:center;color:#9aa9b8;font-size:12.5px;margin-top:30px;line-height:1.7}
+  .hint{font-size:12.5px;color:var(--sub);margin-top:6px}
+  .quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .quick button{font-size:12.5px;background:#fff;border:1px solid var(--line);color:var(--sub);
+    padding:6px 11px;border-radius:20px;cursor:pointer}
+  .quick button:hover{border-color:var(--brand);color:var(--brand)}
+  /* process ladder */
+  .ladder{position:relative;margin-top:6px}
+  .step{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .sn{flex:none;width:40px;height:40px;border-radius:11px;background:var(--brand);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px}
+  .step.lv2 .sn{background:var(--teal)} .step.lv3 .sn{background:var(--amber)} .step.lv4 .sn{background:var(--brand-d)}
+  .step .sc h4{margin:0 0 3px;font-size:16px;font-weight:800}
+  .step .sc .eff{display:inline-block;font-size:11.5px;font-weight:700;color:var(--green);
+    background:#e7f6ee;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .step .sc p{margin:4px 0 0;font-size:13.7px;color:#3c4d5e}
+  .step .sc .tools{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
+  .step .sc .tools span{font-size:12px;background:#eef4fb;color:var(--brand-d);padding:3px 10px;border-radius:20px;font-weight:600}
+  .recipe{background:#fbfdff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:8px}
+  .recipe h4{margin:0 0 8px;font-size:14px;color:var(--brand)}
+  .recipe ol{margin:0;padding-left:20px;font-size:13.7px}
+  .recipe ol li{margin-bottom:5px}
+  .recipe code{background:#eef0f4;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#b4334a}
+  /* considerations */
+  .cons{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:840px){.cons{grid-template-columns:1fr}}
+  .con{border:1px solid var(--line);border-radius:13px;padding:16px 17px;background:var(--card);box-shadow:var(--shadow)}
+  .con .ch{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+  .con .ci{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--brand-l)}
+  .con .ch b{font-size:14.5px}
+  .con .pri{margin-left:auto;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+  .pri.must{background:#fde8e6;color:var(--red)} .pri.high{background:#fcf2e0;color:#b9802a}
+  .con p{margin:0;font-size:13.3px;color:#3c4d5e}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Hospital Workflow Automation · AI Demo</div>
+    <h1>병원 업무 자동화 AI 시연</h1>
+    <p>의뢰·회송 문서 작성, 통계 보고서 생성, 교육자료 제작 — 어느 조직에서나 쓰이는 자동화를 병원 업무에 적용한 인터랙티브 예제입니다.</p>
+    <div class="demo-badge">● 시연용 데모 · 가상 샘플 데이터 (실제 환자정보 아님)</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" onclick="showTab(0)">
+      <span class="tnum">1</span>
+      <div class="tt">의뢰·회송 문서 자동화</div>
+      <div class="ts">정보 입력 → 진료의뢰서 자동 작성·분류</div>
+    </div>
+    <div class="tab" onclick="showTab(1)">
+      <span class="tnum">2</span>
+      <div class="tt">데이터 분석·보고서 자동화</div>
+      <div class="ts">통계 시각화 + AI 인사이트 자동 생성</div>
+    </div>
+    <div class="tab" onclick="showTab(2)">
+      <span class="tnum">3</span>
+      <div class="tt">맞춤형 교육자료 제작</div>
+      <div class="ts">주제·대상 선택 → 교육 모듈 자동 구성</div>
+    </div>
+    <div class="tab" onclick="showTab(3)">
+      <span class="tnum">→</span>
+      <div class="tt">제작 과정 (How)</div>
+      <div class="ts">손쉽게 만드는 4단계 방법</div>
+    </div>
+    <div class="tab" onclick="showTab(4)">
+      <span class="tnum">✓</span>
+      <div class="tt">도입 필수 고려사항</div>
+      <div class="ts">시작 전 꼭 점검할 7가지</div>
+    </div>
+  </div>
+
+  <!-- ================= PANEL 1 ================= -->
+  <div class="panel active" id="panel0">
+    <div class="grid2">
+      <div class="card">
+        <h2 class="sec">Step 1 · 입력</h2>
+        <h3 class="title">환자 의뢰 정보</h3>
+        <div class="quick">
+          <button onclick="fillReferral('a')">예시: 흉통 환자</button>
+          <button onclick="fillReferral('b')">예시: 당뇨 합병증</button>
+          <button onclick="fillReferral('c')">예시: 정형외과 회송</button>
+        </div>
+        <div class="row">
+          <div><label>환자명</label><input id="r_name" placeholder="홍길동"></div>
+          <div><label>나이 / 성별</label><input id="r_age" placeholder="58세 / 남"></div>
+        </div>
+        <label>주요 증상 / 소견 (간단 메모)</label>
+        <textarea id="r_symptom" placeholder="예: 3일 전부터 운동 시 흉부 압박감, 좌측 어깨 방사통. 안정 시 호전."></textarea>
+        <div class="row">
+          <div><label>의뢰 유형</label>
+            <select id="r_type">
+              <option>진료 의뢰 (상급병원으로)</option>
+              <option>환자 회송 (협력병원으로)</option>
+            </select>
+          </div>
+          <div><label>대상 협력병원</label>
+            <select id="r_hosp">
+              <option>중앙대학교병원</option>
+              <option>서울365의원</option>
+              <option>건강제일내과</option>
+              <option>새봄정형외과</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" id="r_btn" onclick="genReferral()">⚡ AI 문서 생성</button>
+        <div class="hint">입력한 메모를 바탕으로 정식 의뢰서 양식과 진료과·긴급도 분류를 자동 생성합니다.</div>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">Step 2 · 자동 생성 결과</h2>
+        <h3 class="title">AI 작성 문서</h3>
+        <div class="output" id="r_out">
+          <div class="out-empty">왼쪽에서 정보를 입력하고<br><b>AI 문서 생성</b>을 눌러보세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PANEL 2 ================= -->
+  <div class="panel" id="panel1">
+    <div class="card">
+      <h2 class="sec">협력병원 의뢰·회송 현황 (가상 데이터 · 최근 6개월)</h2>
+      <h3 class="title">데이터 대시보드</h3>
+      <div class="kpis">
+        <div class="kpi"><div class="v">1,284</div><div class="l">총 의뢰 건수</div><div class="d up">▲ 12.4% 전월비</div></div>
+        <div class="kpi"><div class="v">947</div><div class="l">회송 완료</div><div class="d up">▲ 8.1%</div></div>
+        <div class="kpi"><div class="v">73.8%</div><div class="l">회송 회신율</div><div class="d down">▼ 2.3%p</div></div>
+        <div class="kpi"><div class="v">2.4일</div><div class="l">평균 회신 소요</div><div class="d up">▲ 0.6일 단축</div></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3 class="title">협력병원별 의뢰 건수</h3><div class="chartbox"><canvas id="ch1"></canvas></div></div>
+      <div class="card"><h3 class="title">진료과별 회송 현황</h3><div class="chartbox"><canvas id="ch2"></canvas></div></div>
+    </div>
+    <div class="card">
+      <h3 class="title">월별 의뢰·회송 추이</h3><div class="chartbox" style="height:240px"><canvas id="ch3"></canvas></div>
+    </div>
+    <div class="card">
+      <h2 class="sec">Step · AI 분석</h2>
+      <h3 class="title">전략 인사이트 자동 생성</h3>
+      <button class="btn" id="rep_btn" onclick="genReport()">⚡ AI 보고서 생성</button>
+      <div class="output" id="rep_out" style="margin-top:18px">
+        <div class="out-empty">버튼을 누르면 위 데이터를 분석한<br><b>인사이트와 협력 전략 제안</b>이 생성됩니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PANEL 3 ================= -->
+  <div class="panel" id="panel2">
+    <div class="grid2">
+      <div class="card">
+        <h2 class="sec">Step 1 · 조건 선택</h2>
+        <h3 class="title">교육자료 설정</h3>
+        <label>교육 주제</label>
+        <select id="e_topic">
+          <option>진료의뢰·회송 시스템 활용법</option>
+          <option>의뢰서 작성 표준 가이드</option>
+          <option>당뇨병 환자 협진 프로토콜</option>
+          <option>응급 환자 전원 절차</option>
+        </select>
+        <div class="row">
+          <div><label>교육 대상</label>
+            <select id="e_aud">
+              <option>협력병원 의료진 (개원의)</option>
+              <option>전공의 / 인턴</option>
+              <option>간호사 / 코디네이터</option>
+              <option>병원 행정직</option>
+            </select>
+          </div>
+          <div><label>분량 / 난이도</label>
+            <select id="e_len">
+              <option>입문 (30분)</option>
+              <option>표준 (60분)</option>
+              <option>심화 (90분)</option>
+            </select>
+          </div>
+        </div>
+        <label>강조할 키워드 (선택)</label>
+        <input id="e_kw" placeholder="예: 회신율 향상, 서식 자동화, 실제 사례">
+        <button class="btn" id="e_btn" onclick="genEdu()">⚡ AI 교육자료 생성</button>
+        <div class="hint">대상과 난이도에 맞춰 모듈 구성·학습목표·실습을 자동으로 설계합니다.</div>
+      </div>
+      <div class="card">
+        <h2 class="sec">Step 2 · 자동 생성 결과</h2>
+        <h3 class="title">맞춤형 커리큘럼</h3>
+        <div class="output" id="e_out">
+          <div class="out-empty">조건을 선택하고<br><b>AI 교육자료 생성</b>을 눌러보세요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PANEL 4 · HOW ================= -->
+  <div class="panel" id="panel3">
+    <div class="card">
+      <h2 class="sec">How it works · 손쉽게 만드는 방법</h2>
+      <h3 class="title">개발 없이도, 4단계로 시작합니다</h3>
+      <p style="font-size:14px;color:var(--sub);margin-top:-8px">
+        앞의 예제는 모두 <b>코딩 없이</b> 만들 수 있습니다. 거창한 시스템 구축이 아니라, 이미 쓰고 있는 AI 챗봇에 <b>좋은 지시문(프롬프트)</b>을 주는 것에서 출발합니다. 아래로 갈수록 자동화 수준이 높아지지만, 1단계만으로도 당장 효과를 봅니다.</p>
+      <div class="ladder">
+        <div class="step lv1">
+          <div class="sn">1</div>
+          <div class="sc">
+            <h4>챗봇에 직접 물어보기<span class="eff">오늘 당장 · 비용 거의 0</span></h4>
+            <p>ChatGPT·Claude 같은 챗봇 창에 메모나 데이터를 붙여넣고 "이걸 진료의뢰서 양식으로 만들어줘", "이 표를 협력병원별로 분석해줘"라고 자연어로 지시합니다. 엑셀/CSV 파일을 그대로 업로드하면 차트와 요약까지 만들어 줍니다.</p>
+            <div class="tools"><span>ChatGPT</span><span>Claude</span><span>파일 업로드 분석</span></div>
+          </div>
+        </div>
+        <div class="step lv2">
+          <div class="sn">2</div>
+          <div class="sc">
+            <h4>자주 쓰는 지시문을 템플릿으로 저장<span class="eff">표준화 · 재사용</span></h4>
+            <p>잘 만든 프롬프트를 매번 새로 쓰지 않고 저장해 둡니다. 예시 1~2개를 함께 넣어두면(few-shot) 출력 품질과 양식이 일정해집니다. 누가 써도 같은 결과가 나와 팀 전체가 표준 서식을 공유할 수 있습니다.</p>
+            <div class="tools"><span>맞춤형 GPT</span><span>Claude Projects</span><span>프롬프트 템플릿</span></div>
+          </div>
+        </div>
+        <div class="step lv3">
+          <div class="sn">3</div>
+          <div class="sc">
+            <h4>반복 작업을 자동 실행으로 연결<span class="eff">사람 개입 최소화</span></h4>
+            <p>"매일 아침 어제 의뢰 데이터를 모아 요약 보고", "새 파일이 들어오면 자동 분류"처럼 정해진 작업을 예약·트리거로 돌립니다. 사람은 결과만 확인하면 됩니다. 노코드 자동화 도구로 클릭만으로 구성 가능합니다.</p>
+            <div class="tools"><span>예약 실행</span><span>노코드 자동화</span><span>폴더 연동</span></div>
+          </div>
+        </div>
+        <div class="step lv4">
+          <div class="sn">4</div>
+          <div class="sc">
+            <h4>병원 시스템(EMR 등)과 API 연동<span class="eff">완전 자동화</span></h4>
+            <p>전자의무기록·문서양식과 직접 연결해, 입력하면 AI가 서식을 채우고 분류·저장까지 하는 단계입니다. 가장 강력하지만 개발·보안 검토가 필요하므로, 1~3단계로 효과를 검증한 뒤 도입하는 것을 권합니다.</p>
+            <div class="tools"><span>API 연동</span><span>EMR 통합</span><span>IT/개발 협업</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="recipe">
+        <h4>💡 좋은 결과를 얻는 3가지 공통 원칙</h4>
+        <ol>
+          <li><b>역할·목표를 구체적으로:</b> "너는 진료협력센터 담당자다. 아래 메모를 정식 의뢰서로 작성하라"처럼 <code>맥락 + 목표</code>를 함께 줍니다.</li>
+          <li><b>예시를 보여주기:</b> 원하는 출력 형태의 샘플 1~2개를 함께 넣으면 양식이 안정적으로 고정됩니다.</li>
+          <li><b>출력 형식을 지정:</b> "표로", "항목별로", "300자 이내로" 등 형식을 명시하면 후속 편집이 줄어듭니다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PANEL 5 · CONSIDERATIONS ================= -->
+  <div class="panel" id="panel4">
+    <div class="card">
+      <h2 class="sec">Before you start · 도입 필수 고려사항</h2>
+      <h3 class="title">시작 전 꼭 점검할 7가지</h3>
+      <p style="font-size:14px;color:var(--sub);margin-top:-8px">
+        병원은 민감정보와 환자 안전을 다루므로, 일반 업무보다 한층 신중한 점검이 필요합니다. 특히 <b>개인정보 보호</b>와 <b>사람의 최종 검증</b>은 타협할 수 없는 항목입니다.</p>
+      <div class="cons">
+        <div class="con">
+          <div class="ch"><div class="ci">🔒</div><b>개인정보·보안</b><span class="pri must">필수</span></div>
+          <p>환자정보는 민감정보입니다. 외부 공개 챗봇에 실제 환자 데이터를 그대로 입력하지 말고, 비식별화하거나 원내 폐쇄망·의료 규정을 준수하는(데이터 미학습) 솔루션을 사용해야 합니다. (개인정보보호법·의료법)</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">👤</div><b>사람의 최종 검증</b><span class="pri must">필수</span></div>
+          <p>AI 결과는 '초안'입니다. 의료진의 검토·서명 절차를 반드시 유지하세요. AI는 그럴듯하지만 틀린 내용(환각)을 만들 수 있으므로, 최종 판단과 책임은 사람에게 있습니다.</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">⚖️</div><b>책임 소재·규제</b><span class="pri high">중요</span></div>
+          <p>진단·임상 의사결정을 지원하는 AI는 의료기기 규제 대상이 될 수 있습니다. 반면 문서 작성·통계 같은 <b>행정 자동화</b>는 상대적으로 자유롭습니다. 적용 영역의 규제 해당 여부를 먼저 확인하세요.</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">📊</div><b>데이터 품질</b><span class="pri high">중요</span></div>
+          <p>입력이 부실하면 결과도 부실합니다(Garbage in, Garbage out). 양식·용어를 표준화하고 데이터를 깨끗한 표로 정리해 두는 것이 자동화 품질의 80%를 좌우합니다.</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">🔄</div><b>업무 통합·변화관리</b><span class="pri high">중요</span></div>
+          <p>기존 워크플로우에 자연스럽게 녹여야 합니다. 전체 도입 전 작은 범위로 <b>파일럿</b>을 돌리고, 직원 교육과 피드백 수렴을 거쳐 단계적으로 확대하세요.</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">💰</div><b>비용·효과(ROI)</b><span class="pri">권장</span></div>
+          <p>도구 비용 대비 절감되는 시간·인력을 측정합니다. "보고서 작성 3시간 → 20분"처럼 정량 지표를 정해두면 도입 효과를 설득하고 확대 근거로 쓸 수 있습니다.</p>
+        </div>
+        <div class="con">
+          <div class="ch"><div class="ci">🤝</div><b>투명성·동의</b><span class="pri">권장</span></div>
+          <p>AI 활용 사실을 환자·직원에게 적절히 고지하고, 결과에 편향이 없는지 주기적으로 점검합니다. 신뢰가 곧 지속가능한 도입의 토대입니다.</p>
+        </div>
+      </div>
+      <div class="ai-note" style="margin-top:18px">🧭 <b>요약:</b> "민감하지 않은 <b>행정·문서·교육</b> 업무"부터, "사람이 검증하는 구조"로, "작게 파일럿 후 확대" — 이 세 가지가 안전하고 빠른 도입의 핵심입니다.</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    본 페이지는 AI 업무 자동화 가능성을 보여주기 위한 <b>시연용 데모</b>입니다.<br>
+    모든 데이터는 가상으로 생성되었으며 실제 환자정보·진료기록과 무관합니다.
+  </div>
+</div>
+
+<script>
+/* ---------- tabs ---------- */
+function showTab(i){
+  document.querySelectorAll('.tab').forEach((t,k)=>t.classList.toggle('active',k===i));
+  document.querySelectorAll('.panel').forEach((p,k)=>p.classList.toggle('active',k===i));
+  if(i===1) setTimeout(drawCharts,60);
+}
+
+/* ---------- generating animation helper ---------- */
+function generating(el,msgs,done){
+  el.innerHTML='<div class="gen"><div class="dots"><span></span><span></span><span></span></div><p id="genmsg">'+msgs[0]+'</p></div>';
+  let i=0;const m=el.querySelector('#genmsg');
+  const t=setInterval(()=>{i++;if(i<msgs.length)m.textContent=msgs[i];},620);
+  setTimeout(()=>{clearInterval(t);done();},Math.max(1400,msgs.length*620));
+}
+
+/* ================= 1. REFERRAL ================= */
+const refExamples={
+  a:{name:'김정호',age:'58세 / 남',
+     sym:'3일 전부터 계단 오를 때 흉부 압박감과 좌측 어깨로 뻗치는 통증. 안정 시 5분 내 호전. 흡연 30갑년, 고혈압 병력.',
+     type:0,hosp:0},
+  b:{name:'이순영',age:'64세 / 여',
+     sym:'당뇨 10년 경과. 최근 공복혈당 200 이상 지속, 양측 발 저림 및 시야 흐림 호소. 미세알부민뇨 의심.',
+     type:0,hosp:0},
+  c:{name:'박민재',age:'41세 / 남',
+     sym:'수술 후 6주 경과, 골유합 양호하고 관절 가동범위 정상 회복. 근력강화 재활 단계로 지역 협력병원 통원 권장.',
+     type:1,hosp:3}
+};
+function fillReferral(k){
+  const e=refExamples[k];
+  r_name.value=e.name;r_age.value=e.age;r_symptom.value=e.sym;r_type.selectedIndex=e.type;r_hosp.selectedIndex=e.hosp;
+}
+function classify(sym,type){
+  const s=sym.toLowerCase();
+  let dept='내과', urg='중', uClass='urg-mid';
+  if(/흉통|흉부|압박|어깨로|심장|가슴/.test(sym)){dept='순환기내과';urg='높음';uClass='urg-high';}
+  else if(/당뇨|혈당|알부민|내분비/.test(sym)){dept='내분비내과';urg='중';uClass='urg-mid';}
+  else if(/골|관절|재활|근력|수술 후|정형/.test(sym)){dept='정형외과';urg='낮음';uClass='urg-low';}
+  else if(/시야|시력|안과|눈/.test(sym)){dept='안과';urg='중';uClass='urg-mid';}
+  if(type===1 && urg==='높음'){urg='중';uClass='urg-mid';}
+  return {dept,urg,uClass};
+}
+function genReferral(){
+  const name=r_name.value||'(미입력)',age=r_age.value||'-',sym=r_symptom.value.trim();
+  if(!sym){alert('주요 증상/소견을 입력해 주세요.');return;}
+  const isRef=r_type.selectedIndex===0;
+  const hosp=r_hosp.value;
+  const c=classify(sym,r_type.selectedIndex);
+  const btn=document.getElementById('r_btn');btn.disabled=true;
+  const today=new Date().toLocaleDateString('ko-KR');
+  generating(r_out,['증상 키워드 분석 중...','적정 진료과 분류 중...','긴급도 판단 중...','정식 서식으로 변환 중...'],()=>{
+    btn.disabled=false;
+    const title=isRef?'진 료 의 뢰 서':'환 자 회 송 서';
+    const dir=isRef?'의뢰 받는 기관':'회송 받는 기관';
+    const purpose=isRef
+      ? `상기 환자는 ${c.dept} 영역의 정밀 평가 및 전문 진료가 필요하여 귀 기관으로 의뢰드립니다. 협진 후 회신 부탁드립니다.`
+      : `상기 환자는 급성기 치료가 종료되어 안정적 경과를 보이고 있어, 지속 관리 및 추적 관찰을 위해 귀 기관으로 회송합니다.`;
+    const summary=summarize(sym,c.dept);
+    r_out.innerHTML=`
+      <div class="doc">
+        <div class="doc-head">
+          <div><h4>${title}</h4></div>
+          <div class="meta">문서번호 AI-${Math.floor(Math.random()*9000+1000)}<br>작성일 ${today}</div>
+        </div>
+        <div class="badges">
+          <span class="chip ai">🤖 AI 자동 분류</span>
+          <span class="chip dept">권장 진료과 · ${c.dept}</span>
+          <span class="chip ${c.uClass}">긴급도 · ${c.urg}</span>
+        </div>
+        <div class="doc-field"><div class="k">${dir}</div><div class="v">${hosp}</div></div>
+        <div class="doc-field"><div class="k">환자 정보</div><div class="v">${name} (${age})</div></div>
+        <div class="doc-field"><div class="k">임상 요약</div><div class="v">${summary}</div></div>
+        <div class="doc-field"><div class="k">${isRef?'의뢰':'회송'} 사유</div><div class="v">${purpose}</div></div>
+        <div class="doc-field"><div class="k">원문 메모</div><div class="v" style="color:#8595a6;font-size:13px">"${sym}"</div></div>
+        <div class="ai-note">💡 <b>자동화 포인트:</b> 의사가 적은 한 줄 메모를 정식 서식으로 변환하고, 증상 키워드를 분석해 <b>${c.dept}</b>로 분류, 긴급도를 <b>${c.urg}</b>으로 자동 판정했습니다. 행정 작성 시간을 약 80% 절감합니다.</div>
+      </div>`;
+  });
+}
+function summarize(sym,dept){
+  const first=sym.split(/[.\n]/)[0].trim();
+  return `주 호소 및 경과: ${first}. ${dept} 관련 임상 소견으로 추가 평가가 필요한 상태로 판단됨.`;
+}
+
+/* ================= 2. REPORT ================= */
+let charts={};
+function drawCharts(){
+  if(charts.done)return;charts.done=true;
+  const gc=(id)=>document.getElementById(id).getContext('2d');
+  const C={brand:'#1763c7',teal:'#0f9d8e',amber:'#e8a33d',red:'#e0564b',green:'#27a567',gray:'#c7d3e0'};
+  Chart.defaults.font.family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif";
+  Chart.defaults.font.size=12;Chart.defaults.color='#5a6b7c';
+  charts.c1=new Chart(gc('ch1'),{type:'bar',
+    data:{labels:['중앙대병원','서울365의원','건강제일내과','새봄정형외과','참사랑병원','기타'],
+      datasets:[{label:'의뢰 건수',data:[342,268,201,187,156,130],
+        backgroundColor:[C.brand,C.brand,C.teal,C.amber,C.green,C.gray],borderRadius:6}]},
+    options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}},maintainAspectRatio:false}});
+  charts.c2=new Chart(gc('ch2'),{type:'doughnut',
+    data:{labels:['순환기내과','내분비내과','정형외과','소화기내과','신경과','기타'],
+      datasets:[{data:[27,22,18,14,11,8],
+        backgroundColor:[C.brand,C.teal,C.amber,C.red,C.green,C.gray],borderWidth:2,borderColor:'#fff'}]},
+    options:{plugins:{legend:{position:'right',labels:{boxWidth:12,padding:10}}},cutout:'58%',maintainAspectRatio:false}});
+  charts.c3=new Chart(gc('ch3'),{type:'line',
+    data:{labels:['1월','2월','3월','4월','5월','6월'],
+      datasets:[
+        {label:'의뢰',data:[178,195,210,221,236,244],borderColor:C.brand,backgroundColor:'rgba(23,99,199,.08)',fill:true,tension:.35,borderWidth:2.5},
+        {label:'회송 완료',data:[131,142,150,166,178,180],borderColor:C.teal,backgroundColor:'rgba(15,157,142,.06)',fill:true,tension:.35,borderWidth:2.5}]},
+    options:{plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}},maintainAspectRatio:false}});
+}
+function genReport(){
+  const btn=document.getElementById('rep_btn');btn.disabled=true;
+  generating(rep_out,['협력병원별 패턴 집계 중...','진료과 편중도 분석 중...','회신율 추세 평가 중...','전략 제안 작성 중...'],()=>{
+    btn.disabled=false;
+    rep_out.innerHTML=`
+      <div class="doc" style="padding:22px 24px">
+        <div class="badges"><span class="chip ai">🤖 AI 분석 요약</span><span class="chip dept">최근 6개월</span></div>
+        <div class="insight"><div class="ic">📈</div><div class="tx"><b>의뢰 집중도:</b> 상위 2개 협력병원(중앙대병원·서울365의원)이 전체 의뢰의 <b>47.5%</b>를 차지. 의존도가 높아 <b>의뢰 채널 다변화</b>가 필요합니다.</div></div>
+        <div class="insight"><div class="ic">🩺</div><div class="tx"><b>진료과 편중:</b> 순환기·내분비내과가 회송의 <b>49%</b>. 만성질환 협진 수요가 크므로 해당 과 중심 <b>핫라인·표준 프로토콜</b> 운영을 제안합니다.</div></div>
+        <div class="insight"><div class="ic">⚠️</div><div class="tx"><b>회신율 하락:</b> 전월 대비 회신율 <b>2.3%p 감소</b>. 건강제일내과의 회신 지연이 주 원인으로, <b>회송 결과 자동 알림</b> 도입 시 개선 여지가 있습니다.</div></div>
+        <div class="insight"><div class="ic">🎯</div><div class="tx"><b>전략 제안:</b> ① 중소 협력병원 대상 의뢰 인센티브 ② 순환기/내분비 협진 패스트트랙 ③ 회신율 하위 기관 월간 모니터링 자동화.</div></div>
+        <div class="ai-note">💡 <b>자동화 포인트:</b> 수기 집계 없이 데이터에서 패턴을 추출해 그래프·요약·전략 제안까지 자동 생성. 월간 간담회 보고서를 <b>수 시간 → 수 분</b>으로 단축합니다.</div>
+      </div>`;
+  });
+}
+
+/* ================= 3. EDUCATION ================= */
+function genEdu(){
+  const topic=e_topic.value,aud=e_aud.value,len=e_len.value,kw=e_kw.value.trim();
+  const btn=document.getElementById('e_btn');btn.disabled=true;
+  const mins=len.includes('30')?30:len.includes('60')?60:90;
+  const nMod=mins===30?3:mins===60?4:5;
+  generating(e_out,['대상 수준 분석 중...','학습목표 설정 중...','모듈 구성 중...','실습·평가 설계 중...'],()=>{
+    btn.disabled=false;
+    e_out.innerHTML=buildCurriculum(topic,aud,mins,nMod,kw);
+  });
+}
+function buildCurriculum(topic,aud,mins,nMod,kw){
+  const audShort=aud.split(' ')[0];
+  const per=Math.round(mins/nMod);
+  const base=[
+    {h:'도입 · 왜 중요한가',b:`${audShort} 관점에서 ${topic.replace(/ 활용법| 가이드/,'')}의 필요성과 현장 문제 인식`,li:['현행 업무 흐름의 병목 짚기','개선 시 기대 효과(시간·정확도)','학습 목표 안내']},
+    {h:'핵심 개념 · 표준 절차',b:`${topic}의 단계별 표준 프로세스와 핵심 용어 정리`,li:['전체 워크플로우 한눈에 보기','단계별 책임자와 체크포인트','자주 발생하는 오류와 예방']},
+    {h:'실습 · 따라하기',b:`가상 사례를 활용한 직접 실습 (입력 → 작성 → 분류 → 회신)`,li:['샘플 케이스 3종 실습','AI 자동 작성 기능 시연','작성 결과 상호 점검']},
+    {h:'사례 연구 · 심화',b:`실제와 유사한 협진 사례로 의사결정 연습`,li:['긴급도 판단 시나리오','부서 간 커뮤니케이션 포인트','난이도 높은 예외 상황 대응']},
+    {h:'정리 · 평가',b:`핵심 요약과 이해도 점검, 현장 적용 액션플랜`,li:['5문항 미니 퀴즈','적용 체크리스트 배포','Q&A 및 피드백']}
+  ];
+  const mods=base.slice(0,nMod);
+  // ensure 정리 module is last
+  if(nMod<5 && !mods.some(m=>m.h.includes('정리'))) mods[mods.length-1]=base[4];
+  let html=`<div class="doc edu-out" style="padding:24px 26px">
+    <div class="badges"><span class="chip ai">🤖 AI 맞춤 생성</span><span class="chip dept">${aud}</span><span class="chip urg-low">${mins}분 · ${nMod}개 모듈</span></div>
+    <h4>${topic}</h4>
+    <div class="pill-row">
+      <span class="pill">대상: ${aud}</span><span class="pill">총 ${mins}분</span>
+      ${kw?kw.split(/[ ,]+/).filter(Boolean).map(k=>'<span class="pill">#'+k+'</span>').join(''):''}
+    </div>
+    <p style="font-size:13.5px;color:#5a6b7c;margin:14px 0 16px">학습 목표: <b>${audShort}</b>이(가) ${topic.replace(/ 활용법| 가이드/,'')}을(를) 독립적으로 수행하고, 자동화 도구를 실무에 적용할 수 있다.</p>`;
+  mods.forEach((m,i)=>{
+    html+=`<div class="edu-module">
+      <div class="mh"><span>모듈 ${i+1}. ${m.h}</span><span class="dur">약 ${per}분</span></div>
+      <div class="mb">${m.b}
+        <ul>${m.li.map(x=>'<li>'+x+'</li>').join('')}</ul>
+      </div></div>`;
+  });
+  html+=`<div class="ai-note">💡 <b>자동화 포인트:</b> 동일 주제도 <b>${aud}</b> 수준과 <b>${mins}분</b> 분량에 맞춰 모듈 수·실습 비중·용어 난이도를 자동 조정했습니다. 대상별 교육자료를 일일이 다시 만들 필요가 없습니다.</div></div>`;
+  return html;
+}
+</script>
+</body>
+</html>
