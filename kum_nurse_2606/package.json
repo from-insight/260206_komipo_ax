@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "slidev build && cp hospital_ai_demo.html vibe_coding_walkthrough.html dist/",
     "dev": "slidev --open",
     "export": "slidev export --per-slide"
   },
